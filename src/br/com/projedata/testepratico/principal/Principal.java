@@ -2,7 +2,6 @@ package br.com.projedata.testepratico.principal;
 
 import br.com.projedata.testepratico.enuns.Funcao;
 import br.com.projedata.testepratico.modelos.Funcionario;
-import br.com.projedata.testepratico.utils.DataNascimentoComparator;
 import br.com.projedata.testepratico.utils.FormataBigDecimal;
 
 import java.math.BigDecimal;
@@ -42,20 +41,21 @@ public class Principal {
         // Imprimindo a lista com todos os funcionários
         // Com a data de nascimento exibida no formato dd/mm/aaaa
         // Com o salário exibido no formatado com separador de milhar como ponto e decimal como vírgula
+        System.out.println("Lista com todos os funcionários adicionados.");
         funcionarios.forEach(System.out::println);
-        System.out.println("***************************************************************************************");
+        System.out.println("\n********************************************************************************************\n");
 
         System.out.println("Lista com o funcionário João removido.");
         funcionarios.removeIf(funcionario -> funcionario.getNome().equals("João"));
         funcionarios.forEach(System.out::println);
-        System.out.println("***************************************************************************************");
+        System.out.println("\n********************************************************************************************\n");
 
         System.out.println("Lista de funcionários com o salário com reajuste de 10%.");
         for (Funcionario funcionario: funcionarios) {
             funcionario.reajustaSalario(10);
             System.out.println(funcionario);
         }
-        System.out.println("***************************************************************************************");
+        System.out.println("\n********************************************************************************************\n");
 
         System.out.println("Agrupamento dos funcionários por função em um MAP, sendo a chave a “função” e o valor a “lista de funcionários\"");
         Map<Funcao, List<Funcionario>> funcionariosPorFuncao
@@ -63,23 +63,23 @@ public class Principal {
         for (Funcao key: funcionariosPorFuncao.keySet()){
             System.out.println(key+ " = " + funcionariosPorFuncao.get(key));
         }
-        System.out.println("***************************************************************************************");
+        System.out.println("\n********************************************************************************************\n");
 
         System.out.println("Funcionários que fazem aniversário no mês 10 e 12");
         List<Funcionario> funcionariosAniversario = funcionarios.stream().
                 filter(funcionario -> funcionario.getDataNascimento().getMonthValue() == 10 || funcionario.getDataNascimento().getMonthValue() == 12).toList();
         funcionariosAniversario.forEach(System.out::println);
-        System.out.println("***************************************************************************************");
+        System.out.println("\n********************************************************************************************\n");
 
         funcionarios = funcionarios.stream().sorted(Comparator.comparing(Funcionario::getDataNascimento)).collect(Collectors.toList());
         Funcionario funcionarioComMaiorIdade = funcionarios.get(0);
         System.out.println("Funcionário(a) com a maior idade é " + funcionarioComMaiorIdade.getNome() + ", " + funcionarioComMaiorIdade.getIdade() + " anos.");
-        System.out.println("***************************************************************************************");
+        System.out.println("\n********************************************************************************************\n");
 
         funcionarios = funcionarios.stream().sorted(Comparator.comparing(Funcionario::getNome)).collect(Collectors.toList());
         System.out.println("Funcionários por ordem alfabética:");
         funcionarios.forEach(System.out::println);
-        System.out.println("***************************************************************************************");
+        System.out.println("\n********************************************************************************************\n");
 
         BigDecimal soma = new BigDecimal(0);
         for (Funcionario funcionario: funcionarios) {
@@ -88,7 +88,7 @@ public class Principal {
 
         FormataBigDecimal formata = new FormataBigDecimal();
         System.out.println("O total dos salários dos funcionários é " + formata.formata(soma));
-        System.out.println("***************************************************************************************");
+        System.out.println("\n********************************************************************************************\n");
 
         System.out.println("Quantidade de salários mínimos que cada funcionário ganha:");
         for (Funcionario funcionario: funcionarios) {
